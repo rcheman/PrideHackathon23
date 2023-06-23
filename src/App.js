@@ -1,4 +1,4 @@
-import './App.css';
+import KeywordSelection from './components/KeywordSelection';
 
 function App() {
   return (
@@ -6,13 +6,13 @@ function App() {
       <header className='App-header'>
         <h1>Quickly find diversity and inclusion information</h1>
       </header>
-      <button>Keyword</button>
+      <KeywordSelection />
       <p>Credits:</p>
       <a
         href='https://www.flaticon.com/free-icons/rainbow'
         title='rainbow icons'
       >
-        Rainbow icons created by Freepik - Flaticon
+        Rainbow icon created by Freepik - Flaticon
       </a>
     </div>
   );
