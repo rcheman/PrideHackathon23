@@ -1,0 +1,15 @@
+{
+  "name": "Diversity and Inclusion Seeker",
+  "description": "Identify diversity and inclusion information on a company's website to ease your job search.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup"
+  },
+  "icons": {
+    "16": "rainbow.png",
+    "48": "rainbow.png",
+    "128": "rainbow.png"
+  }
+}
