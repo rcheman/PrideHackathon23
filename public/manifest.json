@@ -11,5 +11,16 @@
     "16": "rainbow.png",
     "48": "rainbow.png",
     "128": "rainbow.png"
-  }
+  },
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
 }

@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import EditKeywords from "./EditKeywords";
 import {commonKeywords} from "../keywords";
 
-export default function KeywordSelection() {
+export default function KeywordSelection({keywords, setKeywords}) {
   // keywords are stored as the word and its active status. ie {"lgbtq": true, "diversity": false}
-  const [keywords, setKeywords] = useState({});
+
   const [newKeyword, setNewKeyword] = useState('');
   const [editing, setEditing] = useState(false);
 
