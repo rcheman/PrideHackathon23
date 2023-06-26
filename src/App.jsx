@@ -1,6 +1,7 @@
 import KeywordSelection from './components/KeywordSelection';
-import { useState } from "react";
 import KeywordsFound from './components/KeywordsFound';
+import BackgroundPicker from "./components/BackgroundPicker";
+import { useState } from "react";
 
 // Set as a known global so ESLint doesn't complain about 'chrome' not being defined
 /* global chrome */
@@ -9,6 +10,7 @@ function App() {
   const [responseFromContent, setResponseFromContent] = useState('');
   const [keywords, setKeywords] = useState({});
   const [linkSent, setLinkSent] = useState('');
+  const [editing, setEditing] = useState(false)
 
   function sendKeywords() {
     const selectedKeywords = []
@@ -58,13 +60,14 @@ function App() {
       <p>{linkSent}</p>
       <KeywordSelection keywords={keywords} setKeywords={setKeywords} />
       <button onClick={sendKeywords} className="btn btn-success" >Search for Keywords</button>
-      <p>Credits:</p>
-      <a
+      <p>Credits:</p> <a
         href='https://www.flaticon.com/free-icons/rainbow'
         title='rainbow icons'
       >
         Rainbow icon created by Freepik - Flaticon
       </a>
+      <button className="btn btn-light btn-sm" onClick={() =>setEditing(!editing)}>Edit Background</button>
+      {editing && <BackgroundPicker />}
     </div>
   );
 }
