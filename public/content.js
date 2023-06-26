@@ -71,7 +71,6 @@ const messagesFromReactAppListener = (message, sender, response) => {
       }
     }
     response(JSON.stringify(keywordsObj))
-    //window.location.assign("https://developer.chrome.com/docs/extensions/mv3/content_scripts/#files");
   } else if (
     sender.id === chrome.runtime.id &&
     message.message === "redirect to link") {
