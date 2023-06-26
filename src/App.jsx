@@ -36,8 +36,8 @@ function App() {
       const currentTabId = tabs[0].id;
       chrome.tabs.sendMessage(currentTabId, msg, (response) => {
         if (response) {
-          const responstObj = JSON.parse(response);
-          setResponseFromContent(KeywordsFound(responstObj, sendLink));
+          const responseObj = JSON.parse(response);
+          setResponseFromContent(responseObj);
         }
       });
     });
@@ -55,11 +55,9 @@ function App() {
       <header className='App-header'>
         <h1>Quickly find diversity and inclusion information</h1>
       </header>
-      <p>Response from content:</p>
-      {responseFromContent}
-      <p>{linkSent}</p>
       <KeywordSelection keywords={keywords} setKeywords={setKeywords} />
       <button onClick={sendKeywords} className="btn btn-success" >Search for Keywords</button>
+      <KeywordsFound response={responseFromContent} sendLink={sendLink} />
       <p>Credits:</p> <a
         href='https://www.flaticon.com/free-icons/rainbow'
         title='rainbow icons'
