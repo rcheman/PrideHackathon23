@@ -42,16 +42,10 @@ function keyWordToUrl(node) {
   return baseUrl + textFragment + node.nodeValue;
 }
 const messagesFromReactAppListener = (message, sender, response) => {
-
-  console.log('[content.js]. Message received', message, sender);
-  console.log(searchKeyWords(message.data));
-
-  // Currently only responds with the keywords it was sent
   if (
     sender.id === chrome.runtime.id &&
     message.message === "search keywords") {
-    // TODO: Do something with the keywords
-    //response(`keyword search data that was found  ${searchKeyWords(message.data)}`)
+
     const keywordsObj = searchKeyWords(message.data);
     for (const word in keywordsObj) {
       if (keywordsObj[word].count === 0)
@@ -74,7 +68,6 @@ const messagesFromReactAppListener = (message, sender, response) => {
   } else if (
     sender.id === chrome.runtime.id &&
     message.message === "redirect to link") {
-    console.log(message.data);
     window.location.assign(message.data);
   }
 

@@ -14,7 +14,7 @@ button {
   margin:10px;
 }
 
-.EditList {
+.EditList, .ResultList {
   list-style: none;
   text-align: left;
 }
@@ -22,8 +22,8 @@ button {
 .App {
   text-align: center;
   background-color: #ffffffcc;
-  margin: 5vw;
-  padding: 5vw;
+  margin: 3vw;
+  padding: 3vw;
   border-radius: 15px;
 
 }

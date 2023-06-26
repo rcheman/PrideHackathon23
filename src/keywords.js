@@ -1,1 +1,1 @@
-export const commonKeywords = ["diversity", "equity", "inclusion", "lgbtq", "affinity groups", "equality", "gender", ]
+export const commonKeywords = ["diversity", "equity", "inclusion", "lgbtq", "gender", ]
