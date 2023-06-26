@@ -36,8 +36,6 @@ function App() {
         if (response) {
           const responstObj = JSON.parse(response);
           setResponseFromContent(KeywordsFound(responstObj, sendLink));
-        } else {
-          setResponseFromContent(response);
         }
       });
     });
@@ -45,26 +43,10 @@ function App() {
 
   function sendLink(event) {
     event.preventDefault();
-    sendMessageLink("redirect to link", event.target.value)
+    sendMessage("redirect to link", event.target.value)
+    setLinkSent("link has been sent");
   }
 
-  function sendMessageLink(message, data) {
-    const msg = {
-      message,
-      data
-    }
-
-    const queryInfo = {
-      active: true,
-      currentWindow: true
-    };
-    chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
-      const currentTabId = tabs[0].id;
-      chrome.tabs.sendMessage(currentTabId, msg, (response) => {
-        setLinkSent("link has been sent");
-      });
-    });
-  }
 
   return (
     <div className='App'>
@@ -72,7 +54,7 @@ function App() {
         <h1>Quickly find diversity and inclusion information</h1>
       </header>
       <p>Response from content:</p>
-      <p>{responseFromContent}</p>
+      {responseFromContent}
       <p>{linkSent}</p>
       <KeywordSelection keywords={keywords} setKeywords={setKeywords} />
       <button onClick={sendKeywords} className="btn btn-success" >Search for Keywords</button>
