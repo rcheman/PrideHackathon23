@@ -9,9 +9,6 @@ function App() {
   const [responseFromContent, setResponseFromContent] = useState('');
   const [keywords, setKeywords] = useState({});
   const [linkSent, setLinkSent] = useState('');
-  // need to create state for the links and then send the link chosen back to content.js to 
-  // redirect the page since content.js is the only thing that can interact with window webpage
-  //const [] = useState('');
 
   function sendKeywords() {
     const selectedKeywords = []
@@ -68,9 +65,6 @@ function App() {
       });
     });
   }
-
-  //<p>{Object.keys(responseFromContent).map((word) => {return (<p>{word}</p>)})}</p>
-  //<KeywordsFound reponse={responseFromContent} />
 
   return (
     <div className='App'>

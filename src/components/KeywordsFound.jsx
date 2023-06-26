@@ -10,12 +10,6 @@ export default function KeywordsFound(response, sendLink) {
 
   return <ul>{Object.keys(response).map((word) => {
     return (
-      //      <li>
-      //        {word}
-      //        <ul>
-      //          {keywordLinks(response[word].links)}
-      //        </ul>
-      //      </li>
       <label>
         {word}
         <select onChange={sendLink} >
