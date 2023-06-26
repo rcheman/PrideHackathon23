@@ -1,5 +1,6 @@
 import KeywordSelection from './components/KeywordSelection';
-import {useState} from "react";
+import { useState } from "react";
+import KeywordsFound from './components/KeywordsFound';
 
 // Set as a known global so ESLint doesn't complain about 'chrome' not being defined
 /* global chrome */
@@ -7,11 +8,15 @@ import {useState} from "react";
 function App() {
   const [responseFromContent, setResponseFromContent] = useState('');
   const [keywords, setKeywords] = useState({});
+  const [linkSent, setLinkSent] = useState('');
+  // need to create state for the links and then send the link chosen back to content.js to 
+  // redirect the page since content.js is the only thing that can interact with window webpage
+  //const [] = useState('');
 
   function sendKeywords() {
     const selectedKeywords = []
-    for (let key in keywords){
-      if (keywords[key] === true){
+    for (let key in keywords) {
+      if (keywords[key] === true) {
         selectedKeywords.push(key)
       }
     }
@@ -31,12 +36,41 @@ function App() {
     chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
       const currentTabId = tabs[0].id;
       chrome.tabs.sendMessage(currentTabId, msg, (response) => {
-        setResponseFromContent(response);
+        if (response) {
+          const responstObj = JSON.parse(response);
+          setResponseFromContent(KeywordsFound(responstObj, sendLink));
+        } else {
+          setResponseFromContent(response);
+        }
       });
     });
   }
 
+  function sendLink(event) {
+    event.preventDefault();
+    sendMessageLink("redirect to link", event.target.value)
+  }
 
+  function sendMessageLink(message, data) {
+    const msg = {
+      message,
+      data
+    }
+
+    const queryInfo = {
+      active: true,
+      currentWindow: true
+    };
+    chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
+      const currentTabId = tabs[0].id;
+      chrome.tabs.sendMessage(currentTabId, msg, (response) => {
+        setLinkSent("link has been sent");
+      });
+    });
+  }
+
+  //<p>{Object.keys(responseFromContent).map((word) => {return (<p>{word}</p>)})}</p>
+  //<KeywordsFound reponse={responseFromContent} />
 
   return (
     <div className='App'>
@@ -45,7 +79,8 @@ function App() {
       </header>
       <p>Response from content:</p>
       <p>{responseFromContent}</p>
-      <KeywordSelection keywords={keywords} setKeywords={setKeywords}/>
+      <p>{linkSent}</p>
+      <KeywordSelection keywords={keywords} setKeywords={setKeywords} />
       <button onClick={sendKeywords} className="btn btn-success" >Search for Keywords</button>
       <p>Credits:</p>
       <a
