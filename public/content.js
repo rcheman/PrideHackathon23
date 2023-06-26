@@ -53,21 +53,21 @@ const messagesFromReactAppListener = (message, sender, response) => {
     // TODO: Do something with the keywords
     //response(`keyword search data that was found  ${searchKeyWords(message.data)}`)
     const keywordsObj = searchKeyWords(message.data);
-    for(const word in keywordsObj){
-      if(keywordsObj[word].count === 0)
+    for (const word in keywordsObj) {
+      if (keywordsObj[word].count === 0)
         delete keywordsObj[word];
     }
-    for(const word in keywordsObj){
+    for (const word in keywordsObj) {
       let minStrLength = 10;
-      for(let i = 0 ; i < keywordsObj[word].textContent.length; ++i){
+      for (let i = 0; i < keywordsObj[word].textContent.length; ++i) {
         const textContents = keywordsObj[word].textContent;
-        if(textContents[i].length < minStrLength){
+        if (textContents[i].length < minStrLength) {
           minStrLength = textContents[i].length;
         }
       }
-      for(let i = 0 ; i < keywordsObj[word].textContent.length; ++i){
+      for (let i = 0; i < keywordsObj[word].textContent.length; ++i) {
         const textContents = keywordsObj[word].textContent;
-        textContents[i] = textContents[i].slice(0,minStrLength);
+        textContents[i] = textContents[i].slice(0, minStrLength);
       }
     }
     response(JSON.stringify(keywordsObj))
